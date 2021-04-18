@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 bears <- read.csv(file="BEARS.csv",header = TRUE)
 ```
-
+# NECK
 ## Model LENGTH ~ NECK  this is an example  
 
 ```{r}
@@ -27,11 +27,29 @@ summary.lm(simp)
 ```
 
 ```{r}
-simp <- lm(LENGTH~HEADWTH,data=bears)
-plot(LENGTH~HEADWTH,data=bears)
-abline(simp)
-summary.lm(simp)
+new <- data.frame(NECK=bears$NECK [c(5,15,23)])
+predict(simp,new,se.fit=TRUE)
 ```
+
+
+# HEADWTH
+# MODEL LENGTH - HEADWTH
+```{r}
+simpHW <- lm(LENGTH~HEADWTH,data=bears)
+plot(LENGTH~HEADWTH,data=bears)
+abline(simpHW)
+summary.lm(simpHW)
+```
+
+
+```{r}
+new <- data.frame(HEADWTH=bears$HEADWTH [c(5,15,23)])
+predict(simpHW,new,se.fit=TRUE)
+```
+
+
+# HEADLEN
+# MODEL LENGTH - HEADLEN
 
 ```{r}
 simpHL <- lm(LENGTH~HEADLEN,data=bears)
@@ -41,6 +59,15 @@ summary.lm(simpHL)
 ```
 
 ```{r}
+new <- data.frame(HEADLEN=bears$HEADLEN [c(5, 15, 23)])
+predict(simpHL,new,se.fit=TRUE)
+```
+
+
+# WEIGHT
+# MODEL LENGTH - WEIGHT
+
+```{r}
 simpW <- lm(LENGTH~WEIGHT,data=bears)
 plot(LENGTH~WEIGHT,data=bears)
 abline(simp)
@@ -48,10 +75,24 @@ summary.lm(simpW)
 ```
 
 ```{r}
+new <- data.frame(WEIGHT=bears$WEIGHT [c(5, 15, 23)])
+predict(simpW,new,se.fit=TRUE)
+```
+
+# CHEST
+# MODEL LENGTH - CHEST
+
+```{r}
 simCT <- lm(LENGTH~CHEST,data=bears)
 plot(LENGTH~CHEST,data=bears)
 abline(simp)
 summary.lm(simCT)
+```
+
+
+```{r}
+new <- data.frame(CHEST=bears$CHEST [c(5, 15, 23)])
+predict(simCT,new,se.fit=TRUE)
 ```
 
 
@@ -62,7 +103,6 @@ summary.lm(simCT)
 
 ```{r}
 new <- data.frame(HEADLEN=c(17,13,9))
-predict(simpHL,new)
 predict(simpHL,new,se.fit=TRUE)
 ```
 ## Surely there is another variable that can better predict LENGTH than NECK. Find one and compare its performance to that of neck by it value of Adjusted-Rsquared (bigger is better).
